@@ -28,14 +28,12 @@ class _HomePageState extends State<HomePage> {
 
   void _cambiarTitulo() {
     setState(() {
-      _title = _title == "Hola, Flutter"
-          ? "¡Título cambiado!"
-          : "Hola, Flutter";
+      _title = _title == "Hola, Flutter" ? "¡Título cambiado!" : "Hola, Flutter";
     });
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text("Título actualizado")));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Título actualizado")),
+    );
   }
 
   @override
@@ -48,31 +46,48 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Juan David Mendoza Rincón", // <-- pon tu nombre completo
+              "Juan David Mendoza Rincón",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
 
-            // Row con imágenes
+            // Row con Stack y imagen local
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // centra todo el Row
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.network(
-                  "https://fastly.picsum.photos/id/464/200/300.jpg?hmac=M4MNTPYELJRy0vZcT-h-EWmXkPdnXHvF9ufEPkhDt2g", // ejemplo de la web que pasaste
-                  width: 100,
+                // Imagen de internet con Stack
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.network(
+                      "https://fastly.picsum.photos/id/464/200/300.jpg?hmac=M4MNTPYELJRy0vZcT-h-EWmXkPdnXHvF9ufEPkhDt2g",
+                      width: 150,
+                    ),
+                    Container(
+                      color: Colors.black54,
+                      padding: const EdgeInsets.all(4),
+                      child: const Text(
+                        "Juan David Mendoza",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 20), // separa las imágenes
+                // Imagen local
                 Image.asset(
-                  "assets/logo.png", // tu imagen local
+                  "assets/logo.png",
                   width: 100,
                 ),
               ],
             ),
-
             const SizedBox(height: 20),
 
-            // ListView dentro de un Container
+            // ListView dentro de Container
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
